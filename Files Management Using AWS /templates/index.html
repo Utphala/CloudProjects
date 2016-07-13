@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1> Interface to Upload files and run queries on AWS </h1>
+{% if response_value %}
+<h1>{{ response_value }}</h1>
+{% endif %}
+
+<h2>Upload New File</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+	<input name="file_to_upload" type="file" >
+	<input type="submit" value="Upload File"/>
+</form>
+
+{% if response_value %}
+<h1>{{ response_value }}</h1>
+{% endif %}
+
+
+
+</body>
+</html>

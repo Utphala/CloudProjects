@@ -1,0 +1,21 @@
+myData <- read.csv("Data(1).csv", header=TRUE)
+nums <- sapply(myData, is.numeric)
+
+myData <- myData[,nums]
+
+shinyUI(pageWithSidebar(
+  headerPanel(' Utphala Puttananjammagari, ID: 6180'),
+  
+  sidebarPanel(
+    selectInput('xval', 'Select 1st Column', names(myData)),
+    selectInput('yval', 'Select 2nd Column', names(myData)),
+    numericInput('clusters', 'Select clusters', 3,min = 1, max = 10)),
+  
+  mainPanel(
+    plotOutput('plot1'),
+    plotOutput('plot2'),
+    textOutput('plot3')
+  )
+))
+
+

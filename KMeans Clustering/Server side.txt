@@ -1,0 +1,27 @@
+
+myData <- read.csv("Data(1).csv")
+nums <- sapply(myData, is.numeric)
+myData <- myData[,nums]
+
+shinyServer(function(input, output, session) {
+  
+  # Combine the selected variables into a new data frame
+  selectedData <- reactive({                                # Reactive acts as "event-listener" 
+    myData[, c(input$xval, input$yval)]                     # listening for changes 
+  })
+
+  clusters <- reactive({
+    kmeans(selectedData(), input$clusters)
+  })
+ 
+  print(clusters()$centers)
+  print(clusters()$size)
+
+  output$plot1 <- renderText({
+    
+    str2 <- c("Centers are: ",clusters()$centers)
+    str2
+  })
+  
+})
+

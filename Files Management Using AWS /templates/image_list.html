@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>AWS services</title>
+</head>
+<body>
+
+<h1> Interface to Upload files and run queries on AWS </h1>
+{% if response_value %}
+<h1>{{ response_value }}</h1>
+{% endif %}
+
+<h2>Upload New File</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+	<input name="file_to_upload" type="file" >
+	<input type="submit" value="Upload File"/>
+</form>
+
+<form action="/delete" method="POST">
+{% if files_list %}
+<table border="1">
+<tr>
+<th></th>
+<th>File name</th>
+</tr>
+</tr>
+{% for key, value in files_list.iteritems() %}
+<tr>
+<td><input type="radio" name="file_to_delete" value="{{ key }}"></td>
+<td>{{ value[0] }}</td>
+</tr>
+{% endfor %}
+{% endif %}
+
+</table>
+<input type="submit" value="Delete File"/>
+</form>
+
+<h2>Download File</h2>
+<form action="/download" method="POST">
+<input type="text" name="file_to_download" required="">
+<input type="submit" value="Download File"/>
+</form>
+
+<h2> Execute queries using RDS </h2>
+<form action="/execute_rds" method="POST">
+<input type="text" name="rds_query_to_execute" required="">
+<input type="submit" value="Run"/>
+</form>
+
+{% if rds_time_taken %}
+<p> Time taken to execute query <font color='red'>{{rds_time_taken}}</font> seconds </p>
+{% endif %}
+
+<h2> Execute queries using memcache </h2>
+<form action="/execute_mem" method="POST">
+<input type="text" name="mem_query_to_execute" required="">
+<input type="submit" value="Run"/>
+</form>
+
+{% if mem_time_taken %}
+<p> Time taken to execute query <font color='red'>{{mem_time_taken}}</font> seconds</p>
+{% endif %}
+
+</body>
+</html>
