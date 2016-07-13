@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<br>  Name : Utphala Puttananjammagari <br> ID: 1001246180 <br> class section : 6:00 <br>
+<H1> <CENTER>Web service to upload notes using Azure</CENTER> </H1>
+<br>
+<p> Logged in as {{ session['user']}}. </p>
+<br>
+<a href="/logout">Logout</a>
+<br>
+{% if timeTaken %}
+<H4> Time: </H4>
+<p> Time taken - Web Service {{timeTaken}} seconds</p>
+{% endif %}
+{% if dbTime %}
+<p> Time taken - Database {{dbTime}} seconds</p>
+{% endif %}
+
+<h2>Upload New Image/Noted</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+<label>Subject</label> <input name='notes_sub' type='text' maxlength='100' placeholder="Provide Subject" required><br>
+<label>Image/Notes</label> <input name="notes_to_upload" type="file" required > <br>
+<label>Priority</label> <input name="notes_prior" type="text" placeholder="Priority between 0 to 10" required><br>
+<input type="submit" value="Save and Upload"/>
+</form>
+
+{% if response_value %}
+<p>{{ response_value }}</p>
+{% endif %}
+
+<h2>View Notes</h2>
+<form action="/view" method="POST">
+<!-- <input name='num_of_images' type='text' placeholder="Provide number of images to display" > -->
+Sort by: <select name="sort_type">
+  <option value="priority">Priority</option>
+  <option value="subject">Subject</option>
+  <option value="uploadTime">Time</option>
+  <option value="fileSize">FileSize</option>
+</select>
+<br>
+<input type="submit" value="Sort and View Notes"/>
+</form>
+<br> 
+<!--
+<h2>Search and Delete</h2>
+<form action="/delete_spec" method="POST">
+<input name='userName_todel' type='text' placeholder="UserName" required> 
+<input name='search_word' type='text' placeholder="Search Word" required> 
+<input type="submit" value="Delete"/>
+</form >
+
+<h2>Add keyword </h2>
+<form action="/add" method="POST">
+<input name='keyword' type='text' placeholder="keyword"  maxlength='5'required> 
+
+<input type="submit" value="add"/>
+</form >
+
+<h2>Search and Display</h2>
+<form action="/search_disp" method="POST">
+
+<input name='search_word' type='text' placeholder="Search Word" required> 
+<input type="submit" value="Display"/>
+</form >
+-->
+</body>
+</html>

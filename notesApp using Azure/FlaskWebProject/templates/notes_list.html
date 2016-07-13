@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<br>  Name : Utphala Puttananjammagari <br> ID: 1001246180 <br> class section : 6:00 <br>
+<H1> <CENTER>Web service to upload notes using Azure</CENTER> </H1>
+<br>
+<p> Logged in as {{ session['user']}}. </p>
+<br>
+<a href="/logout">Logout</a>
+<br>
+{% if timeTaken %}
+<H4> Time: </H4>
+<p> Time taken - Web Service {{timeTaken}} seconds</p>
+{% endif %}
+
+
+<form action="/delete" method="POST">
+<table border="1">
+<tr>
+<th></th>
+<th> Subject </th>
+<th> Notes </th>
+<th> Priority </th>
+<th> Upload Time </th>
+<th></th>
+</tr>
+{% if notes_list %}
+{% for key, value in notes_list.iteritems() %} 
+<tr>
+<td><input type="radio" name="file_to_delete" value="{{ key }}"></td>
+<td>{{ value[0] }}</td>
+{% if value[2] == "text" %}
+	<td>{{ value[1] }}</td>
+{% else %}
+	<td><img src="data:image/png;base64,{{value[1]}}" alt="image" height="200" width="300"/></td>
+{% endif %}
+<td>{{ value[3] }}</td>
+<td>{{ value[4] }}</td>
+<td><input type="submit" value="Delete Notes"></td>
+</tr>
+{% endfor %}
+{% endif %}
+</table> 
+</form> 
+
+</body>
+</html>
+
