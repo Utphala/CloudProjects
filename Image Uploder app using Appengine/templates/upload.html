@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<br>  Name : Utphala Puttananjammagari <br> ID: 1001246180 <br> class section : 6:00 <br>
+<H1> <CENTER>Web service to upload images using appEngine</CENTER> </H1>
+<br>
+<p> Logged in as {{ session['user']}}. </p>
+<br>
+<a href="/logout">Logout</a>
+<br>
+<br>
+<h2>Upload New Image</h2>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+<input name="image_to_upload" type="file" accept="image/*" required>
+<input name='image_desc' type='text' maxlength='25' placeholder="Provide Description" required>
+<input type="submit" value="Save and Upload"/>
+</form>
+
+{% if response_value %}
+<p>{{ response_value }}</p>
+{% endif %}
+{% if timeTaken %}
+<p> Time taken to upload image {{ timeTaken }} seconds</p>
+{% endif %}
+<h2>View File</h2>
+<form action="/view" method="POST">
+<input type="submit" value="View Images"/>
+</form>
+</body>
+</html>

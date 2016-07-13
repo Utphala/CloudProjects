@@ -1,0 +1,11 @@
+<head>
+	<title>Python Starter Application</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!--<link rel="stylesheet" href="stylesheets/style.css" />-->
+</head>
+<body>
+{% for image in result %}
+<img src="data:image/png;base64,{{ image }}"\>
+{% endfor %}
+</body>
+</html>

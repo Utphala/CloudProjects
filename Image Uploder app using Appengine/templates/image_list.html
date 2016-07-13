@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<br>  Name : Utphala Puttananjammagari <br> ID: 1001246180 <br> class section : 6:00 <br>
+<H1> <CENTER>Web service to upload images using appEngine</CENTER> </H1>
+<p> Logged in as {{ session['user']}}. </p>
+<br>
+<a href="/logout">Logout</a>
+{% if timeTaken %}
+<p> Time taken to retrive images {{timeTaken}} seconds</p>
+{% endif %}
+<br>
+<form action="/delete" method="POST">
+<table border="1">
+<tr>
+<th></th>
+<th>User</th>
+<th>Image</th>
+<th>Size(in bytes)</th>
+<th>Comment</th>
+<th></th>
+</tr>
+{% if image_list %}
+{% for key, value in image_list.iteritems() %} 
+<tr>
+<td><input type="radio" name="file_to_delete" value="{{ key }}"></td>
+<td>{{ value[0] }}</td>
+<td><img src="data:image/png;base64,{{value[1]}}" alt="image" height="200" width="300"/></td>
+<td>{{ value[3] }}</td>
+<td>{{ value[2] }}</td>
+<td> <input type="submit" value="Delete Image"/> </td>
+</tr>
+{% endfor %}
+{% endif %}
+</table> 
+</form> 
+
+</body>
+</html>
+
